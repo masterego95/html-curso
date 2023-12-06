@@ -5,39 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro de Professores</title>
   <script>
-    // Função para cadastrar um professor
+    
     function cadastrarProfessor() {
-      // Obter os valores dos campos
+      
       var curso = document.getElementById('curso').value;
       var email = document.getElementById('email').value;
       var senha = document.getElementById('senha').value;
 
-      // Verificar se os campos estão preenchidos
+      
       if (curso && email && senha) {
         // Verificar se o localStorage está disponível
         if (typeof(Storage) !== 'undefined') {
-          // Obter os professores cadastrados (se existirem)
+          
           var professoresCadastrados = JSON.parse(localStorage.getItem('professores')) || [];
 
-          // Criar um novo professor
+         
           var novoProfessor = {
             curso: curso,
             email: email,
             senha: senha
           };
 
-          // Adicionar o novo professor à lista
+          
           professoresCadastrados.push(novoProfessor);
 
-          // Armazenar a lista atualizada no localStorage
+         
           localStorage.setItem('professores', JSON.stringify(professoresCadastrados));
 
-          // Limpar os campos do formulário
+        
           document.getElementById('curso').value = '';
           document.getElementById('email').value = '';
           document.getElementById('senha').value = '';
 
-          // Atualizar a lista de professores na interface
+          
           atualizarListaProfessores();
 
           alert('Professor cadastrado com sucesso!');
@@ -49,23 +49,23 @@
       }
     }
 
-    // Função para atualizar a lista de professores na interface
+    
     function atualizarListaProfessores() {
-      // Obter o elemento de lista
+     
       var listaProfessores = document.getElementById('lista-professores');
 
-      // Limpar a lista existente
+      
       listaProfessores.innerHTML = '';
 
-      // Obter os professores cadastrados
+      
       var professoresCadastrados = JSON.parse(localStorage.getItem('professores')) || [];
 
-      // Adicionar cada professor à lista
+     
       professoresCadastrados.forEach(function(professor) {
         var li = document.createElement('li');
         li.textContent = `${professor.curso} - ${professor.email}`;
 
-        // Adicionar botões de editar e desativar
+        
         var editarButton = document.createElement('button');
         editarButton.textContent = 'Editar';
         editarButton.onclick = function() {
@@ -91,12 +91,11 @@
       });
     }
 
-    // Função para editar um curso
     function editarCurso(cursoAntigo, novoCurso) {
       // Obter os professores cadastrados
       var professoresCadastrados = JSON.parse(localStorage.getItem('professores')) || [];
 
-      // Atualizar o curso do professor na lista
+      
       professoresCadastrados.forEach(function(professor) {
         if (professor.curso === cursoAntigo) {
           professor.curso = novoCurso;
@@ -107,17 +106,17 @@
       localStorage.setItem('professores', JSON.stringify(professoresCadastrados));
     }
 
-    // Função para desativar um curso
+    
     function desativarCurso(curso) {
-      // Obter os professores cadastrados
+      
       var professoresCadastrados = JSON.parse(localStorage.getItem('professores')) || [];
 
-      // Remover o professor com o curso especificado da lista
+      
       professoresCadastrados = professoresCadastrados.filter(function(professor) {
         return professor.curso !== curso;
       });
 
-      // Armazenar a lista atualizada no localStorage
+    
       localStorage.setItem('professores', JSON.stringify(professoresCadastrados));
     }
   </script>
